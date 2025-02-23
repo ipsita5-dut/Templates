@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>World of Eye</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM6g0g5g5g5g5g5g5g5g5g5g5g5g5g5g5g5g5" crossorigin="anonymous">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        .home{
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background-color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .navbar .logo {
+            font-size: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .logo img {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: black;
+            font-size: 16px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #007bff;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100vh;
+            padding: 80px 5%;
+            background-image: url('https://media.istockphoto.com/id/1370102493/photo/concepts-of-augmented-reality-and-biometric-iris-recognition-or-visual-acuity-check-up.jpg?s=612x612&w=0&k=20&c=aDgs53kNt9OfTjCCOA_UPPOw4JSLTX7LisCxEjgo8hs='); /* Replace with your image */
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content {
+            max-width: 40%;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero h1 {
+    font-size: 48px; /* Increased font size for better visibility */
+    font-weight: bold;
+    margin-bottom: 20px; /* Increased margin for spacing */
+    color: #2c3e50; /* Darker color for better contrast */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Hero Section Paragraphs */
+.hero p {
+    font-size: 18px; /* Increased font size for readability */
+    color: #34495e; /* Slightly lighter color for contrast */
+    line-height: 1.8; /* Increased line height for better readability */
+    margin-bottom: 15px; /* Spacing between paragraphs */
+    text-align: justify; /* Justified text for a cleaner look */
+}
+        /* Main Navbar (Centered) */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
+    padding: 10px 20px;
+    border-radius: 40px;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    width: 500px;
+    height: 60px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Navbar Links */
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px 18px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 20px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav-links a:hover {
+    background: black;
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Right Side Navbar (For Login & Sign Up) */
+.auth-navbar {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
+    padding: 10px 20px;
+    border-radius: 40px;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 30px;
+    right: 30px; /* Positioned to the right */
+    z-index: 1000;
+    width: 200px;
+    height: 60px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    justify-content: center;
+}
+
+/* Login & Sign Up Links */
+.auth-navbar a {
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px 18px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 20px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 5px;
+    color: black;
+}
+
+.auth-navbar a:hover {
+    background: black;
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.2);
+}
+
+        .cta-button {
+            display: inline-block;
+            background: black;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .cta-button:hover {
+            background: #333;
+        }
+
+        /* SEO Services Section */
+.seo-services {
+    background-image: linear-gradient(white,#C0F7F7FF);
+    text-align: center;
+    padding: 60px 5%;
+}
+
+.seo-services h2 {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.subheading {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 40px;
+}
+
+/* Grid Layout */
+.seo-container {
+    display: flex;
+    justify-content: center;
+    gap: 150px;
+    flex-wrap: wrap;
+
+}
+
+.seo-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    height: 370px;
+    width: 350px;
+    text-align: left;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.seo-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+.seo-card h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.seo-card p {
+    font-size: 16px;
+    color: #444;
+    margin-bottom: 15px;
+    
+}
+
+.seo-card img {
+    width: 100%;
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out;
+}
+.seo-card:hover img {
+    transform: scale(1.05);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .seo-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+.about-section {
+  display: flex;
+  align-items: left;
+  justify-content: flex-start;
+  background-image: linear-gradient(white,#C0F7F7FF);
+  padding: 100px;
+}
+
+.about-container {
+  display: flex;
+  align-items: center;
+  max-width: 1000px;
+}
+
+.about-image img {
+  width: 380px;
+  
+  border-radius: 10px;
+  margin-right: 10px;
+  margin-left: 200px;
+  height: 300px;
+}
+
+.about-content {
+  max-width: 500px;
+}
+
+.about-content h2 {
+  font-size: 32px;
+  font-weight: bold;
+  color: #4a4a4a;
+}
+
+.about-content p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+
+
+        @media (max-width: 768px) {
+            .about-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            .about-image img {
+                width: 100%;
+            }
+            .about-content {
+                max-width: 100%;
+                padding-left: 0;
+            }
+        }
+
+        .chatbot-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: linear-gradient(#C0F7F7FF,white);
+            padding: 60px 5%;
+        }
+
+        .chatbot-container {
+            display: flex;
+            align-items: center;
+            max-width: 1000px;
+        }
+
+        .chatbot-image img {
+            width: 300px;
+            border-radius: 10px;
+            margin-right: 40px;
+        }
+
+        .chatbot-content {
+            max-width: 500px;
+        }
+
+        .chatbot-content h2 {
+            font-size: 32px;
+            font-weight: bold;
+            color: #4a4a4a;
+        }
+
+        .chatbot-content p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .chatbot-button {
+            display: inline-block;
+            background: black;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .chatbot-button:hover {
+            background: #333;
+        }
+
+        footer {
+            width: 100%;
+            background: linear-gradient(to right, #00093c, #2d0b00);
+            color: white;
+            padding: 100px 0 30px;
+            border-top-left-radius: 125px;
+            font-size: 13px;
+            line-height: 20px;
+            margin-top: auto; /* Push footer to the bottom */
+          }
+          
+          .row {
+            width: 85%;
+            margin: auto;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+          }
+          
+          .col {
+            flex-basis: 25%;
+            padding: 10px;
+          }
+          
+          .logo {
+            width: 80px;
+            margin-bottom: 30px;
+          }
+          
+          .col h3 {
+            width: fit-content;
+            margin-bottom: 40px;
+            position: relative;
+          }
+          
+          .email-id {
+            width: fit-content;
+            border-bottom: 1px solid #ccc;
+            margin: 20px 0;
+          }
+          
+          ul li {
+            list-style: none;
+            color: #fff;
+          }
+          
+          ul li a {
+            text-decoration: none;
+            color: #fff;
+          }
+          
+          form {
+            padding-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 50px;
+          }
+          
+          form input {
+            width: 100%;
+            background: transparent;
+            color: #ccc;
+            border: 0;
+            outline: none;
+          }
+          .social-icons li {
+            display: inline;
+        }
+
+        .social-icons li i {
+            color: white;
+            font-size: 20px; /* Adjust size as needed */
+        }
+    </style>
+  </head>
+  <body class="home">
+
+    <div class="navbar">
+        
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Blog</a>
+            <a href="#">Contact Us</a>
+            <a href="#">About Us</a>
+        </div>
+        
+    </div>
+    <div class="auth-navbar">
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('register') }}">Sign Up</a>
+    </div>
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Unlock Your Potential and Predict Eye Health</h1>
+            <p>Utilize our advanced AI technology to analyze your eye images for early detection of potential eye diseases.</p>
+            <p>Simply upload your eye images, and let our intelligent system provide insights to help you maintain optimal eye health.</p>
+            <a href="#" class="cta-button">Contact Us</a>
+        </div>
+    </div>
+
+    <section class="seo-services">
+        <h2>Our Services</h2>
+        <p class="subheading">Tailored Strategies for Every Business Type</p>
+    
+        <div class="seo-container">
+            <!-- Card 1 -->
+            <div class="seo-card">
+                <h3>Chat With Our EyeMate </h3>
+                <p>Enhance your knowledge about various eye diseases and know the pro & cons.</p>
+                <img src="https://media.istockphoto.com/id/1140521075/photo/tuning-the-intrument-little-boy-with-phoropter-having-testing-his-eyes-in-the-doctors-office.jpg?s=612x612&w=0&k=20&c=vVWaRrp43NcqW28tYAl9xgp98BaZsJiy5A1NIRwWUlA=" alt="SEO for Legal Services">
+            </div>
+    
+            <!-- Card 2 -->
+            <div class="seo-card">
+                <h3>Know Your Eye Diseases by one Snap</h3>
+                <p>Know your eye issues by uploading your outer abd inner eye snaps in one shot.</p>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0MQcPZ2wbdWNI1BphQmaA-zNDCPFscMOkyg&s" alt="SEO for Real Estate Agencies">
+            </div>
+            <div class="seo-card">
+                <h3>Personalized Eye Health Reports</h3>
+                <p>Receive customized reports based on your eye images to track your eye health over time.</p>
+                <img src="https://da4e1j5r7gw87.cloudfront.net/wp-content/uploads/sites/1775/2019/06/Child-Eye-Exam-Girl.jpg" alt="Personalized Eye Health Reports">
+            </div>
+        </div>
+    </section>
+    <section class="chatbot-section">
+        <div class="chatbot-container">
+            <div class="chatbot-image">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgUiEoU4eMNtQ99t1I1IzC3py5WLXr4PlEHQ&s" alt="Chatbot Image">
+            </div>
+            <div class="chatbot-content">
+                <h2>Meet Your AI Assistant</h2>
+                <p>Our AI-powered chatbot is here to assist you with all your queries, providing accurate and instant responses to enhance your experience.</p>
+                <a href="chatbot.html" class="chatbot-button">Learn More</a>
+            </div>
+        </div>
+    </section>
+    <section class="about-section">
+        <div class="about-container">
+            <div class="about-content">
+                <h2>Clear vision, brighter life: Netra Sakti's innovative eye disease prediction platform.</h2><br>
+                <p>Focus on prevention: Netra Sakti's AI-driven eye disease prediction for a healthier you.</p>
+                <p></p>Learn more about our mission and vision.
+                Our team is dedicated to improving eye health.</p>
+            </div>
+            <div class="about-image">
+                <img src="https://www.peacehealth.org/sites/default/files/styles/ph_imgstyle_wide_640/public/2023-04/GettyImages-1184276208.jpg?itok=s_cBOn_J" alt="About Image">
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="row">
+            <div class="col">
+                <img src="logo footer.jpg" class="logo" alt="Logo">
+                <p>Predict and prevent eye <br>diseases with Netra Sakti.</p>
+            </div>
+            <div class="col">
+                <h3>About</h3>
+                <p>Learn more about our mission and vision.</p>
+                <p>Our team is dedicated to improving eye health.</p>
+                <p>Contact us for more information.</p>
+                <p class="email-id">clearview@outlook.com</p>
+                <h4>+91-9876543210</h4>
+            </div>
+            <div class="col">
+                <h3>Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contacts</a></li>
+                    <li><a href="#">Help</a></li>
+                </ul>
+            </div>
+            <div class="col">
+                <h3>Newsletter</h3>
+                <form>
+                    <input type="email" placeholder="Enter your email id" required>
+                </form>
+                <div class="social-icons">
+                    <li><i class="fa-brands fa-facebook"></i></li>
+                    <li><a href="#">Instagram</a></li>
+                    <!-- Add social icons here if needed -->
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- <h1>Welcome to the World of Eye Disease Prediction</h1>
+    <p>Identify inner and outer eye diseases with AI-powered detection.</p>
+    
+    <a href="{{ url_for('store') }}">View Users</a> -->
+  </body>
+</html>
