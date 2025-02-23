@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registered Users</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap");
+
+      /* Base Styling */
+      body {
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(135deg, #1a1a2e, #16213e);
+        color: white;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      h2 {
+        margin-bottom: 20px;
+        font-size: 30px;
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+
+      /* Glassmorphic Table Container */
+      .table-container {
+        width: 90%;
+        max-width: 900px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 12px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+        padding: 20px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        color: #fff;
+      }
+
+      th,
+      td {
+        padding: 15px;
+        text-align: left;
+      }
+
+      th {
+        background: rgba(255, 255, 255, 0.2);
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+
+      tr {
+        transition: all 0.3s ease-in-out;
+      }
+
+      tr:nth-child(even) {
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      tr:hover {
+        background: rgba(255, 255, 255, 0.15);
+        transform: scale(1.02);
+      }
+
+      /* Floating Upload Button */
+      .upload-btn {
+        display: inline-block;
+        margin-top: 30px;
+        padding: 14px 28px;
+        background: linear-gradient(135deg, #ff416c, #ff4b2b);
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .upload-btn::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.2);
+        transition: left 0.3s ease;
+      }
+
+      .upload-btn:hover::after {
+        left: 100%;
+      }
+
+      .upload-btn:hover {
+        background: linear-gradient(135deg, #ff4b2b, #ff416c);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 600px) {
+        th,
+        td {
+          padding: 10px;
+          font-size: 14px;
+        }
+        .upload-btn {
+          padding: 12px 20px;
+          font-size: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Registered Users</h2>
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Age</th>
+        <th>Gender</th>
+      </tr>
+      {% for user in users %}
+      <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.age }}</td>
+        <td>{{ user.gender }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    <br />
+    <style>
+      .upload-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: blue;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+      }
+    </style>
+
+    <a href="{{ url_for('upload') }}" class="upload-btn">Go to Upload Page</a>
+  </body>
+</html>
