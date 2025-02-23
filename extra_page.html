@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chatbot & Video Chat</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+  </head>
+  <body>
+    <h2>Chatbot</h2>
+    <div id="chatbot">
+      <input type="text" id="chatbot-input" placeholder="Ask something..." />
+      <button onclick="askChatbot()">Send</button>
+      <p id="chatbot-response"></p>
+    </div>
+
+    <h2>Video Chat</h2>
+    <div>
+      <input type="text" id="room" placeholder="Room Name" />
+      <input type="text" id="username" placeholder="Your Name" />
+      <button onclick="joinRoom()">Join Room</button>
+    </div>
+
+    <div id="chat"></div>
+
+    <video id="localVideo" autoplay></video>
+    <video id="remoteVideo" autoplay></video>
+
+    <button onclick="startCall()">Start Call</button>
+  </body>
+</html>
