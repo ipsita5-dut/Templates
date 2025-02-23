@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Eye Images</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #5fdaff, #feb47b);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+        .main-container:hover {
+            transform: scale(1.02);
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #4c7999;
+        }
+        .selection-box {
+            display: flex;
+            gap: 30px;
+        }
+        .eye-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 12px;
+            width: 220px;
+            text-align: center;
+            border: 2px solid #64b5f6;
+            transition: background 0.3s, transform 0.3s;
+        }
+        .eye-option:hover {
+            background: #bbdefb;
+            transform: translateY(-5px);
+        }
+        .eye-option img {
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 2px solid #64b5f6;
+            transition: transform 0.3s;
+        }
+        .eye-option img:hover {
+            transform: scale(1.1);
+        }
+        .upload-input {
+            margin-top: 10px;
+            padding: 5px;
+            border: 2px solid #64b5f6;
+            border-radius: 5px;
+            width: 100%;
+            cursor: pointer;
+        }
+        #upload-btn {
+            display: none;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #42a5f5;
+            border: none;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+        #upload-btn:hover {
+            background: #1e88e5;
+            transform: translateY(-2px);
+        }
+        #upload-btn:disabled {
+            background: #b0bec5;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <h2>Select Eye Type & Upload Images</h2>
+        <form
+        action="{{ url_for('upload') }}"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <div class="selection-box">
+            <div class="eye-option">
+                <img src="https://media.istockphoto.com/id/1308485052/photo/structure-of-human-eye.jpg?s=612x612&w=0&k=20&c=rapEDWHG4od0roXmcKs62w4t0n8-7nE007PoEeo5wz4=" alt="Inner Eye">
+                <span>Inner Eye</span>
+                <input type="file" id="inner-eye-upload" class="upload-input" accept="image/*" name="inner_eye">
+            </div>
+            <div class="eye-option">
+                <img src="https://www.lei.org.au/wp-content/uploads/2021/08/the-external-eye.png" alt="Outer Eye">
+                <span>Outer Eye</span>
+                <input type="file" id="outer-eye-upload" class="upload-input" name="outer_eye" accept="image/*">
+            </div>
+        </div>
+        <button id="upload-btn" disabled>Upload</button>
+    </div>
+
+    <script>
+        const innerEyeUpload = document.getElementById("inner-eye-upload");
+        const outerEyeUpload = document.getElementById("outer-eye-upload");
+        const uploadBtn = document.getElementById("upload-btn");
+
+        function checkFiles() {
+            if (innerEyeUpload.files.length > 0 || outerEyeUpload.files.length > 0) {
+                uploadBtn.style.display = "block";
+                uploadBtn.disabled = false;
+            } else {
+                uploadBtn.style.display = "none";
+                uploadBtn.disabled = true;
+            }
+        }
+        innerEyeUpload.addEventListener("change", checkFiles);
+        outerEyeUpload.addEventListener("change", checkFiles);
+    </script>
+</body>
+</html>
