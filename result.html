@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prediction Result</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
+
+      /* General Styling */
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #f3f4f6, #cfd9df);
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        padding: 20px;
+      }
+
+      /* Box Container */
+      .box-container {
+        background: #ffffff;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+        width: 90%;
+        max-width: 500px;
+        text-align: center;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+      }
+
+      .box-container:hover {
+        transform: scale(1.02);
+        box-shadow: 0px 15px 35px rgba(0, 0, 0, 0.3);
+      }
+
+      h2 {
+        margin-bottom: 15px;
+        color: #1565c0;
+        font-weight: 600;
+      }
+
+      p {
+        font-size: 18px;
+        margin: 10px 0;
+        color: #555;
+      }
+
+      strong {
+        color: #e53935;
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      /* Button Styling */
+      .btn {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 12px 25px;
+        font-size: 18px;
+        font-weight: 500;
+        background: linear-gradient(to right, #42a5f5, #1e88e5);
+        color: white;
+        text-decoration: none;
+        border-radius: 30px;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease-in-out;
+      }
+
+      .btn:hover {
+        background: linear-gradient(135deg, #1e88e5, #1565c0);
+        transform: translateY(-2px);
+        box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box-container">
+      <h2>Prediction Results</h2>
+      <h2>Diagnosis Result:</h2>
+      {% if predictions %}
+      <p>The detected disease is: <strong>{{ predictions }}</strong></p>
+      {% else %}
+      <p>No disease detected.</p>
+      {% endif %}
+
+      <p>
+        {{ predictions.get("inner_eye_disease", "No Inner Eye Image Uploaded")
+        }}
+      </p>
+      <p>
+        {{ predictions.get("outer_eye_disease", "No Outer Eye Image Uploaded")
+        }}
+      </p>
+      <a href="{{ url_for('thank_you') }}" class="btn">Proceed</a>
+      <a href="{{url_for('extra_page')}}" class="btn">Open Bot</a>
+    </div>
+  </body>
+</html>
